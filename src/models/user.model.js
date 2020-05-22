@@ -8,17 +8,17 @@ const UserSchema = new Schema({
   password: { type: String, required: true }
 });
 
-userSchema.methods.toJSON = function () {
+UserSchema.methods.toJSON = function () {
   let user = this.toObject();
   delete user.password;
   return user;
 }
 
-userSchema.methods.comparePasswords = function (password) {
+UserSchema.methods.comparePasswords = function (password) {
   return compareSync(password, this.password);
 }
 
-userSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
   const user = this;
 
   if (user.isModified('password')) {
@@ -31,4 +31,4 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('user', UserSchema)

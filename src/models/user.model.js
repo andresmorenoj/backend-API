@@ -14,7 +14,7 @@ UserSchema.methods.toJSON = function () {
   return user;
 }
 
-UserSchema.methods.comparePasswords = function (password) {
+UserSchema.methods.comparePassword = function (password) {
   return compareSync(password, this.password);
 }
 
